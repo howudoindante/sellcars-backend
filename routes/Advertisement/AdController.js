@@ -4,9 +4,13 @@ const Advertisement = require('../../models/Advertisement');
 const User = require('../../models/User');
 
 class AdControlled {
+  async editAdvert(req, res) {
+
+  }
   async getAdvertById(req, res) {
     try {
-      const results = await Advertisement.findOne({_id:"6225d0a01db2c8194a560236"});
+      const results = await Advertisement.findOne({ _id: req.params.id });
+      if (!results) res.status(404);
       return res.json({ ad: results });
     } catch (e) {
       console.log(e);
@@ -20,11 +24,11 @@ class AdControlled {
           $gte: req.query.fromPrice || 0,
           $lte: req.query.toPrice || Infinity,
         },
-        title: { $regex: req.query.title || /.*/ , $options: "i" },
-        author:{ $regex: req.query.author || /.*/ , $options: "i" },
+        title: { $regex: req.query.title || /.*/, $options: "i" },
+        author: { $regex: req.query.author || /.*/, $options: "i" },
       };
-      
-      const results = await Advertisement.find(options).skip(req.query.skip || 0 ).limit(req.query.limit || Infinity);
+
+      const results = await Advertisement.find(options).skip(req.query.skip || 0).limit(req.query.limit || Infinity);
       return res.json({ ad: results });
     } catch (e) {
       console.log(e);
@@ -32,6 +36,7 @@ class AdControlled {
     }
   }
   async createAdvert(req, res) {
+    
     try {
       const [type, token] = req.headers.authorization.split(' ');
       const { title, description, image, price } = req.body;
