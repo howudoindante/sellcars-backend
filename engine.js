@@ -10,6 +10,7 @@ const dotenv = require("dotenv");
 const fs = require( 'fs' );
 const swaggerUi = require( 'swagger-ui-express' );
 const swaggerFile = JSON.parse(fs.readFileSync('./swagger/output.json'));
+const port = process.env.PORT || 5000;
 dotenv.config({ path: './.env' });
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true });
 app.use(router);
@@ -27,7 +28,7 @@ app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 //     console.log("connected");
 // });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
