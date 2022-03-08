@@ -13,7 +13,7 @@
   "paths": {
     "/login": {
       "post": {
-        "description": "",
+        "description": "Login",
         "parameters": [
           {
             "name": "body",
@@ -33,7 +33,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Returns token"
           },
           "400": {
             "description": "Bad Request"
@@ -43,7 +43,7 @@
     },
     "/register": {
       "post": {
-        "description": "",
+        "description": "Register ",
         "parameters": [
           {
             "name": "body",
@@ -73,7 +73,7 @@
     },
     "/auth/login": {
       "post": {
-        "description": "",
+        "description": "Login",
         "parameters": [
           {
             "name": "body",
@@ -93,7 +93,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Returns token"
           },
           "400": {
             "description": "Bad Request"
@@ -103,7 +103,7 @@
     },
     "/auth/register": {
       "post": {
-        "description": "",
+        "description": "Register ",
         "parameters": [
           {
             "name": "body",
@@ -133,7 +133,7 @@
     },
     "/advert/": {
       "post": {
-        "description": "",
+        "description": "Create advert by id",
         "parameters": [
           {
             "name": "authorization",
@@ -163,13 +163,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "400": {
             "description": "Bad Request"
           }
         }
       },
       "get": {
-        "description": "",
+        "description": "Get advert by query",
         "parameters": [
           {
             "name": "fromPrice",
@@ -214,7 +217,7 @@
     },
     "/advert/{id}": {
       "get": {
-        "description": "",
+        "description": "Get advert by id",
         "parameters": [
           {
             "name": "id",
@@ -232,6 +235,68 @@
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "description": "Update advert by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "image": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete advert by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }

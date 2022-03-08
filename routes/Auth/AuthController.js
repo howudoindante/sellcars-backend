@@ -5,7 +5,10 @@ const User = require('../../models/User');
 class AuthController {
   
   async login(req, res) {
-    
+    // #swagger.description = 'Login'
+    /* #swagger.responses[200] = {
+        description: 'Returns token',
+    } */
     try {
       const { username, password } = req.body;
       const account = await User.findOne({username});
@@ -25,6 +28,7 @@ class AuthController {
     }
   }
   async register(req, res) {
+    // #swagger.description = 'Register '
     const {username,password} = req.body;
     const existingAccount = await User.findOne({username});
     if(existingAccount){
