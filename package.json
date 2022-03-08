@@ -4,8 +4,8 @@
   "description": "",
   "main": "engine.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
+    "start": "node engine.js",
+    "server": "nodemon engine.js",
     "gen": "node ./swagger/index.js"
   },
   "keywords": [],
