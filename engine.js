@@ -27,7 +27,7 @@ app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 //     console.log("connected");
 // });
 
-app.listen(port = 5000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
