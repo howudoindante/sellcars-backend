@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+//TODO: Add car additional info like a engine type etc 
 const AdvertisementSchema = new mongoose.Schema({
   title: { type: String, required: true },
   price: { type: Number, required: true , min:0  },

@@ -39,9 +39,20 @@ class AdControlled {
     // #swagger.description = 'Get advert by id'
 
     try {
-      const results = await Advertisement.findOne({ _id: req.params.id });
-      if (!results) res.status(404);
-      return res.json({ ad: results });
+      const advert = await Advertisement.findOne({ _id: req.params.id });
+      
+      if (!advert) res.status(404);
+      if(req.headers.authorization){
+        const [type, token] = req.headers.authorization.split(' ');
+        if(!token) return res.json({ ad: advert });
+        const {id} = jwt.verify(token,process.env.SECRET_KEY);
+        if(!id) return res.json({ ad: advert });
+        const tokenOwner = await User.findOne({_id:id});
+        if(advert.author === tokenOwner.username){
+          return res.json({ ad: advert , isowner:true });
+        }
+      }
+      return res.json({ ad: advert });
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: 'Something did wrong' });

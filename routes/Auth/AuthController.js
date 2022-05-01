@@ -43,6 +43,6 @@ class AuthController {
 }
 AuthController._tokenize = function (payload) {
     
-    return jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "24h" });
+    return jwt.sign(payload, process.env.SECRET_KEY);
 }
 module.exports = new AuthController();
